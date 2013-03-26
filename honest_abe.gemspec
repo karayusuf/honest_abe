@@ -8,11 +8,11 @@ Gem::Specification.new do |gem|
   gem.version       = HonestAbe::VERSION
   gem.authors       = ["Joe Karayusuf"]
   gem.email         = ["jkarayusuf@gmail.com"]
-  gem.description   = %q{TODO: Write a gem description}
-  gem.summary       = %q{TODO: Write a gem summary}
-  gem.homepage      = ""
+  gem.description   = %q{Lightweight continuous integration server}
+  gem.summary       = %q{}
+  gem.homepage      = "https://github.com/karayusuf/honest_abe.git"
 
-  gem.files         = `git ls-files`.split($/)
+  gem.files         = Dir["./**/*.rb"]
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.require_paths = ["lib"]
