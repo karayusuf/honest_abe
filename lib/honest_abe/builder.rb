@@ -2,16 +2,14 @@ module HonestAbe
   class Builder
     attr_reader :commands
 
-    def initialize(commands)
-      @commands = commands
+    def initialize(script)
+      @commands = parse(script)
     end
 
-    def self.build(script)
+    def parse(script)
       commands = script.split("\n")
       commands = commands.map(&:strip)
-      commands = commands.delete_if(&:empty?)
-
-      new(commands)
+      commands.delete_if(&:empty?)
     end
 
   end

@@ -4,14 +4,14 @@ require_file 'honest_abe/builder'
 module HonestAbe
   describe Builder do
 
-    describe ".build" do
+    describe "new" do
       it "parses the script into commands" do
-        build = Builder.build("echo 'Foo'")
+        build = Builder.new("echo 'Foo'")
         build.commands.should eql ["echo 'Foo'"]
       end
 
       it "considers each line a command" do
-        build = Builder.build("echo 'Foo'
+        build = Builder.new("echo 'Foo'
                                echo 'Bar'")
 
         build.commands.should eql [
@@ -21,7 +21,7 @@ module HonestAbe
       end
 
       it "ignores empty lines" do
-        build = Builder.build("echo 'Hello'
+        build = Builder.new("echo 'Hello'
 
                                echo 'World'")
 
