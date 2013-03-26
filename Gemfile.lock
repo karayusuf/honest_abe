@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     honest_abe (0.0.1)
+      rack
       thor
 
 GEM

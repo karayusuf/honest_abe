@@ -1,6 +1,5 @@
 Given(/^I run the command "(.*?)"$/) do |command|
-  system("#{command} &> /dev/null")
-  @process = $?
+  system("#{command} &> /dev/null &")
 end
 
 When(/^I visit the url "(.*?)"$/) do |url|
