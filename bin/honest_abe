@@ -1,0 +1,4 @@
+#!/usr/bin/env ruby
+
+require 'honest_abe'
+puts HonestAbe::VERSION
