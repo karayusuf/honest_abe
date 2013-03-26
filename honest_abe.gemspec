@@ -18,4 +18,7 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
 
   gem.add_dependency "thor"
+
+  gem.add_development_dependency "cucumber"
+  gem.add_development_dependency "capybara"
 end
