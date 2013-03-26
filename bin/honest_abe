@@ -1,4 +1,15 @@
 #!/usr/bin/env ruby
 
+require 'thor'
 require 'honest_abe'
-puts HonestAbe::VERSION
+
+class HonestAbe::CLI < Thor
+
+  desc "server", "Start the server"
+  def server
+    puts "Starting the server"
+  end
+
+end
+
+HonestAbe::CLI.start
