@@ -32,5 +32,15 @@ module HonestAbe
       end
     end
 
+    describe "#run" do
+      it "executes each command" do
+        Kernel.should_receive(:system).
+               with("echo 'Foo'")
+
+        build = Builder.new("echo 'Foo'")
+        build.start
+      end
+    end
+
   end
 end

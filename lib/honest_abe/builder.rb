@@ -6,6 +6,14 @@ module HonestAbe
       @commands = parse(script)
     end
 
+    def start
+      commands.each do |command|
+        ::Kernel.system command
+      end
+    end
+
+    private
+
     def parse(script)
       commands = script.split("\n")
       commands = commands.map(&:strip)
