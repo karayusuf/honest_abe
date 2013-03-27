@@ -4,12 +4,19 @@ module HonestAbe
 
     def initialize(script)
       @commands = parse(script)
+      @successful_commands = []
     end
 
     def start
       commands.each do |command|
-        ::Kernel.system command
+        if ::Kernel.system command
+          @successful_commands << command
+        end
       end
+    end
+
+    def success?
+      @successful_commands == @commands
     end
 
     private
