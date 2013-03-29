@@ -15,7 +15,7 @@ module HonestAbe
 
     def initialize(command)
       @raw_command = command
-      @outcome = :unknown
+      @outcome = :pending
     end
 
     def to_s
@@ -23,11 +23,16 @@ module HonestAbe
     end
 
     def execute
-      @outcome = ::Kernel.system(@raw_command)
+      @outcome =
+        if ::Kernel.system(@raw_command)
+          :success
+        else
+          :failure
+        end
     end
 
     def success?
-      @outcome == true
+      @outcome == :success
     end
   end
 end

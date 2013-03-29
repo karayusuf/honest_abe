@@ -31,6 +31,11 @@ module HonestAbe
         command = Command.new("echo 'Baz'")
         command.raw_command.should eql "echo 'Baz'"
       end
+
+      it "has a default outcome of pending" do
+        command = Command.new("echo 'Baz'")
+        command.outcome.should eql :pending
+      end
     end
 
     describe "#execute" do
@@ -41,14 +46,28 @@ module HonestAbe
         command.execute
       end
 
-      it "stores the outcome of the command" do
-        Kernel.should_receive(:system).with("echo 'Bar'")
-              .and_return("outcome")
+      it "sets the outcome to success when the command returns true" do
+        Kernel.should_receive(:system).with("the-command") { true }
 
-        command = Command.new("echo 'Bar'")
+        command = Command.new("the-command")
         command.execute
+        command.outcome.should eql :success
+      end
 
-        command.outcome.should eql "outcome"
+      it "sets the outcome to failure when the command returns false" do
+        Kernel.should_receive(:system).with("the-command") { false }
+
+        command = Command.new("the-command")
+        command.execute
+        command.outcome.should eql :failure
+      end
+
+      it "sets the outcome to failure when the command returns nil" do
+        Kernel.should_receive(:system).with("the-command") { nil }
+
+        command = Command.new("the-command")
+        command.execute
+        command.outcome.should eql :failure
       end
     end
 
