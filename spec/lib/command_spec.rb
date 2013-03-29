@@ -38,6 +38,13 @@ module HonestAbe
       end
     end
 
+    describe "#to_s" do
+      it "returns the raw command" do
+        command = Command.new("echo 'Foo'")
+        command.to_s.should eql "echo 'Foo'"
+      end
+    end
+
     describe "#execute" do
       it "sends the command to the system" do
         Kernel.should_receive(:system).with("echo 'Baz'")
