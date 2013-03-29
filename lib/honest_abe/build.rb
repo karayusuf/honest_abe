@@ -1,7 +1,7 @@
 require 'honest_abe/command'
 
 module HonestAbe
-  class Builder
+  class Build
     attr_reader :commands
 
     def initialize(script)
