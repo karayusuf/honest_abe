@@ -1,30 +1,22 @@
+require 'honest_abe/command'
+
 module HonestAbe
   class Builder
     attr_reader :commands
 
     def initialize(script)
-      @commands = parse(script)
+      @commands = Command.parse(script)
       @successful_commands = []
     end
 
     def start
       commands.each do |command|
-        if ::Kernel.system command
-          @successful_commands << command
-        end
+        command.execute
       end
     end
 
     def success?
-      @successful_commands == @commands
-    end
-
-    private
-
-    def parse(script)
-      commands = script.split("\n")
-      commands = commands.map(&:strip)
-      commands.delete_if(&:empty?)
+      commands.all? { |command| command.success? }
     end
 
   end

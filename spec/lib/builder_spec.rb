@@ -7,28 +7,7 @@ module HonestAbe
     describe "new" do
       it "parses the script into commands" do
         build = Builder.new("echo 'Foo'")
-        build.commands.should eql ["echo 'Foo'"]
-      end
-
-      it "considers each line a command" do
-        build = Builder.new("echo 'Foo'
-                               echo 'Bar'")
-
-        build.commands.should eql [
-          "echo 'Foo'",
-          "echo 'Bar'"
-        ]
-      end
-
-      it "ignores empty lines" do
-        build = Builder.new("echo 'Hello'
-
-                               echo 'World'")
-
-        build.commands.should eql [
-          "echo 'Hello'",
-          "echo 'World'"
-        ]
+        build.commands.map(&:to_s).should eql ["echo 'Foo'"]
       end
     end
 

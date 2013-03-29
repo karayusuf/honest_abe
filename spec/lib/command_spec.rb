@@ -33,5 +33,40 @@ module HonestAbe
       end
     end
 
+    describe "#execute" do
+      it "sends the command to the system" do
+        Kernel.should_receive(:system).with("echo 'Baz'")
+
+        command = Command.new("echo 'Baz'")
+        command.execute
+      end
+
+      it "stores the outcome of the command" do
+        Kernel.should_receive(:system).with("echo 'Bar'")
+              .and_return("outcome")
+
+        command = Command.new("echo 'Bar'")
+        command.execute
+
+        command.outcome.should eql "outcome"
+      end
+    end
+
+    describe "#success?" do
+      it "returns true when the command succeeded" do
+        command = Command.new("echo foo > /dev/null")
+        command.execute
+
+        command.should be_success
+      end
+
+      it "returns false when the command does not succeed" do
+        command = Command.new("this-command-does-not-exist")
+        command.execute
+
+        command.should_not be_success
+      end
+    end
+
   end
 end
