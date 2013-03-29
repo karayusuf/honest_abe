@@ -6,7 +6,6 @@ module HonestAbe
 
     def initialize(script)
       @commands = Command.parse(script)
-      @successful_commands = []
     end
 
     def start
