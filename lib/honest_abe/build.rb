@@ -1,21 +1,13 @@
 require 'honest_abe/command'
+require 'pathname'
 
 module HonestAbe
   class Build
-    attr_reader :commands
+    attr_reader :directory, :number
 
-    def initialize(script)
-      @commands = Command.parse(script)
-    end
-
-    def start
-      commands.each do |command|
-        command.execute
-      end
-    end
-
-    def success?
-      commands.all? { |command| command.success? }
+    def initialize(directory, number)
+      @directory = Pathname.new(directory).join(number.to_s)
+      @number = number
     end
 
   end
