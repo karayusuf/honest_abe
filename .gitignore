@@ -1,2 +1,3 @@
 *.swp
 pkg/
+spec/support/test_build/
