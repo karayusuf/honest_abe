@@ -37,5 +37,30 @@ module HonestAbe
         build.directory.should have_file "test_file"
       end
     end
+
+    describe "#success?" do
+      it "returns true when all of the commands succeed" do
+        build = Build.new(test_build_directory, 1)
+        build.build("
+          touch first_command
+          touch second_command")
+
+        build.should be_success
+      end
+
+      it "returns true when the build has not yet run" do
+        build = Build.new(test_build_directory, 2)
+        build.should be_success
+      end
+
+      it "returns false when one of the commands fails" do
+        build = Build.new(test_build_directory, 2)
+        build.build("
+          touch first
+          a-command-that-should-not-exist")
+
+        build.should_not be_success
+      end
+    end
   end
 end

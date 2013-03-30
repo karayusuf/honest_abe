@@ -8,14 +8,19 @@ module HonestAbe
     def initialize(path, number)
       @directory = Directory.new(path, number)
       @number = number
+      @commands = []
     end
 
     def build(commands = "")
       @directory.create!
       @directory.within do
-        commands = Command.parse(commands)
-        commands.each(&:execute)
+        @commands = Command.parse(commands)
+        @commands.each(&:execute)
       end
+    end
+
+    def success?
+      @commands.all?(&:success?)
     end
 
   end
