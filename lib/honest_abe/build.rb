@@ -1,19 +1,17 @@
 require 'honest_abe/command'
-
-require 'fileutils'
-require 'pathname'
+require 'honest_abe/directory'
 
 module HonestAbe
   class Build
     attr_reader :directory, :number
 
-    def initialize(directory, number)
-      @directory = Pathname.new(directory).join(number.to_s)
+    def initialize(path, number)
+      @directory = Directory.new(path, number)
       @number = number
     end
 
     def build
-      FileUtils.mkdir_p @directory.to_s
+      @directory.create!
     end
 
   end

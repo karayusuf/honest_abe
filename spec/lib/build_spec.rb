@@ -8,7 +8,7 @@ module HonestAbe
         expected_directory = Pathname.new("#{test_build_directory}/10")
 
         build = Build.new(test_build_directory, 10)
-        build.directory.should eql expected_directory
+        build.directory.should == expected_directory
       end
 
       it "does not create the directory" do
