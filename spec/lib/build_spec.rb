@@ -29,6 +29,13 @@ module HonestAbe
 
         build.directory.should be_exist
       end
+
+      it "executes the commands inside of the directory" do
+        build = Build.new(test_build_directory, 1)
+        build.build("touch test_file")
+
+        build.directory.should have_file "test_file"
+      end
     end
   end
 end

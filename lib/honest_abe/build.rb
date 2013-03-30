@@ -10,8 +10,12 @@ module HonestAbe
       @number = number
     end
 
-    def build
+    def build(commands = "")
       @directory.create!
+      @directory.within do
+        commands = Command.parse(commands)
+        commands.each(&:execute)
+      end
     end
 
   end
