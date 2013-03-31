@@ -19,6 +19,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency "rack"
   gem.add_dependency "thor"
+  gem.add_dependency "grit"
 
   gem.add_development_dependency "capybara"
   gem.add_development_dependency "cucumber"
